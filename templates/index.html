@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>RaspiRover-Steuerung</title>
+    </head>
+    <body>
+        <h1>{{titeltext}}</h1>
+	<form method="post" action="/">
+            <input type="range" min="0" max="127" value="60" class="slider" id="geschwindigkeit">
+            <table>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" name="steuerbefehl" value="vor"></td>
+                    <td></td>
+            	</tr>
+            	<tr>
+                    <td><input type="submit" name="steuerbefehl" value="links"></td>
+                    <td><input type="submit" name="steuerbefehl" value="stop"></td>
+                    <td><input type="submit" name="steuerbefehl" value="rechts"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" name="steuerbefehl" value="zurueck"></td>
+                    <td></td>
+                </tr>
+            </table>
+	</form>
+    </body>
+</html>
