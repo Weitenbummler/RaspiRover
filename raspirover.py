@@ -4,7 +4,7 @@ import paho.mqtt.client as mqtt
 from flask import Flask, render_template, request
 from roboclaw_3 import Roboclaw
 
-geschwindigkeitswert = 60
+geschwindigkeit = 60
 
 roboclaw = Roboclaw('/dev/ttyACM0', 38400)
 roboclaw.Open()
@@ -20,11 +20,11 @@ def index():
    
         #geschwindigkeit = request.form["geschwindigkeit"]
 
-        if request.form['steuerbefehl'] == "vor": fahre_rover_vorwaerts(geschwindigkeitswert)
+        if request.form['steuerbefehl'] == "vor": fahre_rover_vorwaerts(geschwindigkeit) 
         if request.form['steuerbefehl'] == "stop": stoppe_rover()
-        if request.form['steuerbefehl'] == "zurueck": fahre_rover_rueckwaerts(geschwindigkeitswert)
-        if request.form['steuerbefehl'] == "rechts": drehe_rover_nach_rechts(geschwindigkeitswert)
-        if request.form['steuerbefehl'] == "links": drehe_rover_nach_links(geschwindigkeitswert)
+        if request.form['steuerbefehl'] == "zurueck": fahre_rover_rueckwaerts(geschwindigkeit)
+        if request.form['steuerbefehl'] == "rechts": drehe_rover_nach_rechts(geschwindigkeit)
+        if request.form['steuerbefehl'] == "links": drehe_rover_nach_links(geschwindigkeit)
 
     return render_template ('index.html')
 
@@ -55,9 +55,9 @@ def rechts():
     drehe_rover_nach_rechts(geschwindigkeit)
     return "rechts"
 
-@app.route("/geschwindigkeit/<int:parameter>")
+@app.route("/geschwindigkeit/<int:wert>")
 def geschwindigkeit():
-    geschwindigkeitswert = parameter
+    geschwindigkeit = wert
     return "geschwindigkeit gesetzt"   
 
 # Befehle an Roboclaw geben
