@@ -4,7 +4,7 @@ import paho.mqtt.client as mqtt
 from flask import Flask, render_template, request
 from roboclaw_3 import Roboclaw
 
-geschwindigkeit = 60
+c_geschwindigkeit = 60
 
 roboclaw = Roboclaw('/dev/ttyACM0', 38400)
 roboclaw.Open()
@@ -60,26 +60,36 @@ def rechts():
 def fahre_rover_vorwaerts(geschwindigkeit):
     drehe_rechten_motor_vorwaerts(geschwindigkeit)
     drehe_linken_motor_vorwaerts(geschwindigkeit)
+    client.publish("RaspiRover/Bewegung", "vorwaerts")
+    client.publish("RaspiRover/Geschwindigkeit", geschwindigkeit)
     return "OK"
 
 def fahre_rover_rueckwaerts(geschwindigkeit):
     drehe_rechten_motor_rueckwaerts(geschwindigkeit)
     drehe_linken_motor_rueckwaerts(geschwindigkeit)
+    client.publish("RaspiRover/Bewegung", "rueckwaerts")
+    client.publish("RaspiRover/Geschwindigkeit", geschwindigkeit)
     return "OK"
 
 def drehe_rover_nach_rechts(geschwindigkeit):
     drehe_rechten_motor_rueckwaerts(geschwindigkeit)
     drehe_linken_motor_vorwaerts(geschwindigkeit)
+    client.publish("RaspiRover/Bewegung", "dreht rechts")
+    client.publish("RaspiRover/Geschwindigkeit", geschwindigkeit)
     return "OK"
 
 def drehe_rover_nach_links(geschwindigkeit):
     drehe_rechten_motor_vorwaerts(geschwindigkeit)
     drehe_linken_motor_rueckwaerts(geschwindigkeit)
+    client.publish("RaspiRover/Bewegung", "dreht links")
+    client.publish("RaspiRover/Geschwindigkeit", geschwindigkeit)
     return "OK"
 
 def stoppe_rover():
     drehe_rechten_motor_vorwaerts(0)
     drehe_linken_motor_vorwaerts(0)
+    client.publish("RaspiRover/Bewegung", "gestoppt")
+    client.publish("RaspiRover/Geschwindigkeit", 0)
     return "OK"
  
 def drehe_rechten_motor_vorwaerts(geschwindigkeit):
@@ -107,8 +117,8 @@ client = mqtt.Client()
 client.on_connect = on_connect
 client.username_pw_set("mqtt_user", password="mqttpwd")
 client.connect("192.168.178.74", 1883, 60)
-client.publish("RaspiRover/Status", "test")
-
+client.publish("RaspiRover/Bewegung", "gestoppt")
+client.publish("RaspiRover/Geschwindigkeit", 0)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=1337, debug=True)
