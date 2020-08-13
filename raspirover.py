@@ -31,12 +31,12 @@ def index():
 # Kommandos direkt über einzelne URLs
 
 @app.route("/vor")
-def vorwaerts(geschwindigkeit):
+def vorwaerts():
     fahre_rover_vorwaerts(geschwindigkeit)
     return "vorwärts"
 
 @app.route("/zurueck")
-def zurueck(geschwindigkeit):
+def zurueck():
     fahre_rover_rueckwaerts(geschwindigkeit)
     return "zurück"
 
