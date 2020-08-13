@@ -4,7 +4,7 @@ import paho.mqtt.client as mqtt
 from flask import Flask, render_template, request
 from roboclaw_3 import Roboclaw
 
-c_geschwindigkeit = 60
+geschwindigkeit = 60
 
 roboclaw = Roboclaw('/dev/ttyACM0', 38400)
 roboclaw.Open()
