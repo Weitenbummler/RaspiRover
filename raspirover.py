@@ -1,3 +1,6 @@
+
+import time
+from paho.mqtt.client import mqtt
 from flask import Flask, render_template, request
 from roboclaw_3 import Roboclaw
 
@@ -94,6 +97,18 @@ def drehe_rechten_motor_rueckwaerts(geschwindigkeit):
 def drehe_linken_motor_rueckwaerts(geschwindigkeit):
     roboclaw.BackwardM2(0x80, geschwindigkeit)
     return "OK"
+
+# MQTT
+
+def on_connect(client, userdata, flags, rc):
+    print("Connected with result code " + str(rc))
+
+client = mqtt.Client()
+client.on_connect = on_connect
+client.username_pw_set("mqtt_user", password="mqttpwd")
+client.connect("192.168.178.74", 1883, 60)
+client.publish("RaspiRover/Status", "test")
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=1337, debug=True)
