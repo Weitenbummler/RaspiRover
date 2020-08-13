@@ -55,11 +55,6 @@ def rechts():
     drehe_rover_nach_rechts(geschwindigkeit)
     return "rechts"
 
-@app.route("/geschwindigkeit/<int:wert>")
-def geschwindigkeit():
-    geschwindigkeit = wert
-    return "geschwindigkeit gesetzt"   
-
 # Befehle an Roboclaw geben
 
 def fahre_rover_vorwaerts(geschwindigkeit):
