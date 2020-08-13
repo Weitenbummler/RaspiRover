@@ -1,6 +1,6 @@
 
 import time
-from paho.mqtt.client import mqtt
+import paho.mqtt.client as mqtt
 from flask import Flask, render_template, request
 from roboclaw_3 import Roboclaw
 
