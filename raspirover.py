@@ -30,12 +30,12 @@ def index():
 
 # Kommandos direkt über einzelne URLs
 
-@app.route("/vor/<int:geschwindigkeit>")
+@app.route("/vor")
 def vorwaerts(geschwindigkeit):
     fahre_rover_vorwaerts(geschwindigkeit)
     return "vorwärts"
 
-@app.route("/zurueck/<int:geschwindigkeit>")
+@app.route("/zurueck")
 def zurueck(geschwindigkeit):
     fahre_rover_rueckwaerts(geschwindigkeit)
     return "zurück"
@@ -54,6 +54,11 @@ def links():
 def rechts():
     drehe_rover_nach_rechts(geschwindigkeit)
     return "rechts"
+
+ @app.route("/<int:value>")
+def rechts():
+    geschwindigkeit = value
+    return "geschwindigkeit gesetzt"   
 
 # Befehle an Roboclaw geben
 
