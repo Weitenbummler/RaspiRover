@@ -15,7 +15,7 @@ def index():
 
     if request.method == 'POST':
    
-        geschwindigkeit = request.form["geschwindigkeit"]
+        #geschwindigkeit = request.form["geschwindigkeit"]
 
         if request.form['steuerbefehl'] == "vor": fahre_rover_vorwaerts(geschwindigkeit)
         if request.form['steuerbefehl'] == "stop": stoppe_rover()
