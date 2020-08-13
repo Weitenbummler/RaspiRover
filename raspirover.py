@@ -55,7 +55,7 @@ def rechts():
     drehe_rover_nach_rechts(geschwindigkeit)
     return "rechts"
 
- @app.route("/geschwindigkeit/<int:parameter>")
+@app.route("/geschwindigkeit/<int:parameter>")
 def geschwindigkeit():
     geschwindigkeitswert = parameter
     return "geschwindigkeit gesetzt"   
